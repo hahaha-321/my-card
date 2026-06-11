@@ -1,152 +1,105 @@
-/*
-============================================
-文件名称：script.js
-功能说明：个人名片网页的交互脚本
-作者：Reasonix AI 助手
-创建日期：2026年6月11日
-============================================
-这个文件负责名片的交互功能：
-1. 页面加载时名片淡入动画
-2. 头像点击时弹跳动画
-3. "保存名片"按钮功能
-4. "分享名片"按钮功能
-5. "联系我"邮箱弹窗功能
-*/
+// ============================================
+// 文件名称：script.js
+// 功能说明：个人名片网页的交互逻辑
+// 作者：Reasonix AI 助手
+// 创建日期：2026年6月11日
+// 这个文件控制按钮点击、弹窗、动画等交互行为
+// ============================================
 
-// ========== 页面加载完成后执行 ==========
-
-window.onload = function () {
-
-    // ----- 第 1 步：名片淡入动画 -----
-    var cardElement = document.getElementById("card");
-    if (cardElement) {
-        cardElement.classList.add("fade-in");
-    }
-
-    // ----- 第 2 步：给头像添加点击弹跳动画 -----
-    var avatarElement = document.getElementById("avatar");
-    if (avatarElement) {
-        avatarElement.addEventListener("click", function () {
-            avatarElement.style.transform = "scale(0.9)";
-            setTimeout(function () {
-                avatarElement.style.transform = "scale(1.0)";
-            }, 200);
-        });
-    }
-};
-
-// ========== "保存名片"按钮功能 ==========
-
+// ========== 保存名片功能 ==========
+// 创建一个 .vcf 文件（电子名片格式），让用户可以下载保存
 function saveContact() {
-    var contactInfo = "姓名：小明\n";
-    contactInfo = contactInfo + "介绍：正在学习用 AI 开发程序\n";
-    contactInfo = contactInfo + "邮箱：xiaoming@example.com";
+    // vCard 格式的文本内容
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:小明
+TEL:请通过邮箱联系
+EMAIL:xiaoming@example.com
+NOTE:正在学习用 AI 开发程序
+END:VCARD`;
 
-    var blob = new Blob([contactInfo], { type: "text/plain;charset=utf-8" });
-    var url = URL.createObjectURL(blob);
+    // 创建一个 Blob 对象（相当于一个文件数据块）
+    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+    // 创建一个临时的下载链接
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "小明名片.vcf"; // 下载的文件名
+    document.body.appendChild(link);
+    link.click(); // 触发下载
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href); // 释放内存
 
-    var downloadLink = document.createElement("a");
-    downloadLink.href = url;
-    downloadLink.download = "小明_联系方式.txt";
-    downloadLink.style.display = "none";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    URL.revokeObjectURL(url);
-
-    showToast("名片已保存为文件！");
+    // 按钮动画反馈
+    const btn = document.getElementById("btnSave");
+    btn.textContent = "✅ 已保存";
+    setTimeout(() => {
+        btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> 保存名片';
+    }, 1500);
 }
 
-// ========== "分享名片"按钮功能 ==========
-
+// ========== 分享名片功能 ==========
 function shareCard() {
-    var shareText = "【小明的个人名片】\n正在学习用 AI 开发程序\n邮箱：xiaoming@example.com";
+    // 名片信息文本
+    const shareText = "小明\n正在学习用 AI 开发程序\n邮箱：xiaoming@example.com";
 
+    // 检查浏览器是否支持 Web Share API（手机浏览器通常支持）
     if (navigator.share) {
         navigator.share({
-            title: "小明的个人名片",
+            title: "小明的名片",
             text: shareText,
-        }).catch(function (error) {});
+        }).catch(() => {}); // 用户取消分享时不做处理
     } else {
-        copyToClipboard(shareText);
-        showToast("名片内容已复制到剪贴板，可以粘贴发给朋友！");
+        // 电脑浏览器不支持 Web Share，改为复制到剪贴板
+        navigator.clipboard.writeText(shareText).then(() => {
+            const btn = document.getElementById("btnShare");
+            btn.textContent = "✅ 已复制";
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-share-nodes"></i> 分享名片';
+            }, 1500);
+        }).catch(() => {
+            alert("复制失败，请手动复制");
+        });
     }
 }
 
-// ========== 复制文字到剪贴板的函数 ==========
-
-function copyToClipboard(text) {
-    var textarea = document.createElement("textarea");
-    textarea.value = text;
-    textarea.style.position = "fixed";
-    textarea.style.left = "-9999px";
-    textarea.style.top = "0";
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-}
-
-// ========== 顶部提示信息函数（Toast 通知） ==========
-
-function showToast(message) {
-    var toast = document.createElement("div");
-    toast.textContent = message;
-
-    toast.style.position = "fixed";
-    toast.style.top = "30px";
-    toast.style.left = "50%";
-    toast.style.transform = "translateX(-50%)";
-    toast.style.backgroundColor = "#323232";
-    toast.style.color = "#ffffff";
-    toast.style.padding = "12px 28px";
-    toast.style.borderRadius = "25px";
-    toast.style.fontSize = "14px";
-    toast.style.fontFamily = '"Microsoft YaHei", "PingFang SC", sans-serif';
-    toast.style.zIndex = "9999";
-    toast.style.boxShadow = "0 4px 16px rgba(0,0,0,0.25)";
-    toast.style.opacity = "0";
-    toast.style.transition = "opacity 0.4s ease, top 0.4s ease";
-
-    document.body.appendChild(toast);
-
-    setTimeout(function () {
-        toast.style.opacity = "1";
-        toast.style.top = "40px";
-    }, 0);
-
-    setTimeout(function () {
-        toast.style.opacity = "0";
-        toast.style.top = "20px";
-        setTimeout(function () {
-            document.body.removeChild(toast);
-        }, 400);
-    }, 3000);
-}
-
-// ========== 「联系我」弹窗功能 ==========
-
+// ========== 弹窗功能 ==========
+// 显示邮箱弹窗
 function showEmailModal() {
-    // 打开邮箱弹窗
-    var overlay = document.getElementById("modalOverlay");
-    if (overlay) {
-        overlay.classList.add("show");
-    }
+    const overlay = document.getElementById("modalOverlay");
+    overlay.classList.add("show");
+
+    // 弹窗出现时禁止页面滚动
+    document.body.style.overflow = "hidden";
 }
 
+// 关闭邮箱弹窗
 function closeEmailModal() {
-    // 关闭弹窗（点击遮罩背景或关闭按钮时执行）
-    var overlay = document.getElementById("modalOverlay");
-    if (overlay) {
-        overlay.classList.remove("show");
-    }
+    const overlay = document.getElementById("modalOverlay");
+    overlay.classList.remove("show");
+
+    // 恢复页面滚动
+    document.body.style.overflow = "";
 }
 
+// 复制邮箱并关闭弹窗
 function copyEmailAndClose() {
-    // 复制邮箱到剪贴板，然后关闭弹窗
-    var emailText = "xiaoming@example.com";
-    copyToClipboard(emailText);
-    showToast("邮箱已复制到剪贴板！");
-    closeEmailModal();
+    const email = "xiaoming@example.com";
+    navigator.clipboard.writeText(email).then(() => {
+        const btn = document.querySelector(".modal-btn-copy");
+        btn.textContent = "✅ 已复制";
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fa-solid fa-copy"></i> 复制邮箱';
+            closeEmailModal();
+        }, 800);
+    }).catch(() => {
+        alert("复制失败，请手动复制");
+    });
 }
+
+// ========== 键盘快捷键 ==========
+// 按 ESC 键关闭弹窗
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeEmailModal();
+    }
+});

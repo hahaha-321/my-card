@@ -1,78 +1,65 @@
-/*
-============================================
-文件名称：style.css
-功能说明：个人名片网页的样式文件
-作者：Reasonix AI 助手
-创建日期：2026年6月11日
-============================================
-这个文件控制名片网页的所有外观效果，
-包括颜色、字体、布局、动画和手机/电脑适配。
-*/
+/* ============================================
+   文件名称：style.css
+   功能说明：个人名片网页的样式
+   作者：Reasonix AI 助手
+   创建日期：2026年6月11日
+   这个文件控制名片的颜色、布局、动画等外观
+   ============================================ */
 
-/* ========== 全局基础样式 ========== */
-
+/* === 页面全局重置：去掉浏览器默认边距和内边距 === */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* 让 padding 和 border 包含在宽度内 */
 }
 
 body {
-    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-    min-height: 100vh;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif; /* 中文字体 */
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); /* 浅蓝渐变背景 */
+    min-height: 100vh; /* 至少占满整个屏幕高度 */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
     padding: 20px;
 }
 
-/* ========== 页面容器 ========== */
-
 .page-container {
-    width: 100%;
-    max-width: 420px;
     display: flex;
-    flex-direction: column; /* 改为纵向排列，让名片和按钮上下排列 */
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-/* ========== 名片卡片主体 ========== */
-
 .card {
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
-    padding: 40px 30px 30px 30px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px 36px 30px;
+    width: 360px;
+    max-width: 100%;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.10);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
 }
 
-/* ========== 头像区域 ========== */
-
 .avatar-section {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .avatar {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin: 0 auto;
     background: linear-gradient(135deg, #42a5f5, #1e88e5);
     display: flex;
-    align-items: center;
     justify-content: center;
-    border: 4px solid #e3f2fd;
+    align-items: center;
+    margin: 0 auto;
+    box-shadow: 0 4px 16px rgba(33, 150, 243, 0.30);
     transition: transform 0.3s ease;
-    cursor: default;
 }
 
 .avatar:hover {
@@ -80,68 +67,47 @@ body {
 }
 
 .avatar-placeholder {
-    font-size: 42px;
     color: #ffffff;
+    font-size: 2.2em;
     font-weight: bold;
-    user-select: none;
 }
-
-/* ========== 名字 ========== */
 
 .name {
-    font-size: 28px;
-    color: #1565c0;
-    font-weight: 700;
-    margin-bottom: 8px;
-    letter-spacing: 2px;
+    font-size: 1.8em;
+    color: #1a237e;
+    margin-bottom: 6px;
 }
-
-/* ========== 一句话介绍 ========== */
 
 .tagline {
-    font-size: 15px;
+    font-size: 1em;
     color: #78909c;
-    margin-bottom: 24px;
-    line-height: 1.6;
+    margin-bottom: 20px;
 }
-
-/* ========== 分割线 ========== */
 
 .divider {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, transparent, #bbdefb, transparent);
-    margin: 0 auto 24px auto;
-    width: 80%;
+    background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+    margin: 0 0 20px;
 }
 
-/* ========== 联系方式区域 ========== */
-
 .contact-section {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 10px 0;
+    gap: 10px;
+    color: #546e7a;
+    font-size: 0.95em;
 }
 
 .contact-icon {
     color: #42a5f5;
-    font-size: 16px;
-    width: 20px;
+    font-size: 1.1em;
 }
-
-.contact-text {
-    font-size: 14px;
-    color: #546e7a;
-    letter-spacing: 0.5px;
-}
-
-/* ========== 按钮区域 ========== */
 
 .button-section {
     display: flex;
@@ -149,132 +115,90 @@ body {
     justify-content: center;
 }
 
-.btn-save,
-.btn-share {
+.btn-save, .btn-share {
     padding: 10px 22px;
     border: none;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 600;
+    border-radius: 30px;
+    font-size: 0.9em;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: inherit;
-    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .btn-save {
-    background-color: #1e88e5;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.30);
 }
 
 .btn-save:hover {
-    background-color: #1565c0;
-    box-shadow: 0 6px 16px rgba(30, 136, 229, 0.4);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.40);
 }
 
 .btn-share {
-    background-color: #ffffff;
-    color: #1e88e5;
-    border: 2px solid #1e88e5;
+    background: #f5f5f5;
+    color: #546e7a;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .btn-share:hover {
-    background-color: #e3f2fd;
+    background: #eeeeee;
     transform: translateY(-2px);
 }
 
-.btn-save:active,
-.btn-share:active {
-    transform: translateY(0);
-}
-
-/* ========== 加载入场动画 ========== */
-
-.card.fade-in {
-    animation: cardFadeIn 0.8s ease forwards;
-}
-
-@keyframes cardFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ========== 卡片下方的「联系我」按钮 ========== */
-
 .btn-contact {
-    display: block;
-    width: 100%;
-    max-width: 260px;
-    margin: 20px auto 0 auto;
-    padding: 12px 0;
+    margin-top: 20px;
+    padding: 12px 32px;
     border: none;
-    border-radius: 25px;
-    font-size: 15px;
-    font-weight: 600;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #42a5f5;
+    font-size: 0.95em;
     cursor: pointer;
-    font-family: inherit;
-    letter-spacing: 1px;
-    background: linear-gradient(135deg, #42a5f5, #1e88e5);
-    color: #ffffff;
-    box-shadow: 0 4px 14px rgba(30, 136, 229, 0.35);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .btn-contact:hover {
-    background: linear-gradient(135deg, #1e88e5, #1565c0);
-    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.5);
     transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    background: #e3f2fd;
 }
-
-.btn-contact:active {
-    transform: translateY(0);
-}
-
-/* ========== 邮箱弹窗（Modal） ========== */
 
 .modal-overlay {
+    display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.45);
-    display: flex;
-    align-items: center;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.40);
     justify-content: center;
-    z-index: 10000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+    align-items: center;
+    z-index: 999;
 }
 
 .modal-overlay.show {
-    opacity: 1;
-    pointer-events: auto;
+    display: flex;
 }
 
 .modal-box {
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 30px 28px 24px 28px;
-    width: 90%;
-    max-width: 360px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px 32px 24px;
+    width: 320px;
+    max-width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.20);
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
+    animation: modalFadeIn 0.25s ease;
 }
 
-.modal-overlay.show .modal-box {
-    transform: scale(1.0);
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.92) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .modal-header {
@@ -282,124 +206,70 @@ body {
 }
 
 .modal-icon {
-    font-size: 40px;
+    font-size: 2em;
     color: #42a5f5;
-    display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .modal-title {
-    font-size: 20px;
-    color: #1565c0;
-    font-weight: 700;
+    font-size: 1.3em;
+    color: #1a237e;
 }
 
 .modal-body {
-    margin-bottom: 20px;
-    padding: 14px 0;
-    background-color: #e3f2fd;
-    border-radius: 10px;
+    margin-bottom: 24px;
 }
 
 .modal-text {
-    font-size: 18px;
-    color: #1e88e5;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 1.1em;
+    color: #546e7a;
+    background: #f5f5f5;
+    padding: 12px 16px;
+    border-radius: 12px;
     word-break: break-all;
 }
 
 .modal-footer {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
 }
 
-.modal-btn-copy {
-    padding: 10px 20px;
+.modal-btn-copy, .modal-btn-close {
+    padding: 10px 24px;
     border: none;
-    border-radius: 22px;
-    font-size: 14px;
-    font-weight: 600;
+    border-radius: 30px;
+    font-size: 0.9em;
     cursor: pointer;
-    font-family: inherit;
-    background-color: #1e88e5;
-    color: #ffffff;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.modal-btn-copy {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: #fff;
 }
 
 .modal-btn-copy:hover {
-    background-color: #1565c0;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
 
 .modal-btn-close {
-    padding: 10px 20px;
-    border: 2px solid #bbb;
-    border-radius: 22px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-    background-color: #ffffff;
-    color: #78909c;
-    transition: all 0.3s ease;
+    background: #f5f5f5;
+    color: #546e7a;
 }
 
 .modal-btn-close:hover {
-    background-color: #f5f5f5;
-    border-color: #999;
+    background: #eeeeee;
 }
 
-/* ========== 响应式设计：手机屏幕适配 ========== */
-
-@media (max-width: 480px) {
-    body {
-        padding: 15px;
-    }
-    .card {
-        padding: 30px 20px 24px 20px;
-        border-radius: 16px;
-    }
-    .avatar {
-        width: 80px;
-        height: 80px;
-    }
-    .avatar-placeholder {
-        font-size: 34px;
-    }
-    .name {
-        font-size: 24px;
-    }
-    .tagline {
-        font-size: 14px;
-    }
-    .button-section {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .btn-save,
-    .btn-share,
-    .btn-contact {
-        width: 100%;
-        padding: 12px 0;
-    }
-    .modal-box {
-        width: 95%;
-        padding: 24px 18px 20px 18px;
-    }
-    .modal-footer {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .modal-btn-copy,
-    .modal-btn-close {
-        width: 100%;
-    }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-    .card {
-        padding: 35px 25px 28px 25px;
-    }
+@media (max-width: 420px) {
+    .card { padding: 30px 20px 24px; }
+    .avatar { width: 80px; height: 80px; }
+    .avatar-placeholder { font-size: 1.8em; }
+    .name { font-size: 1.4em; }
+    .button-section { flex-direction: column; gap: 8px; }
+    .btn-save, .btn-share { width: 100%; justify-content: center; }
 }

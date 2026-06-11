@@ -1,97 +1,62 @@
-<!--
-============================================
-文件名称：index.html
-功能说明：个人名片网页的主页面
-作者：Reasonix AI 助手
-创建日期：2026年6月11日
-============================================
-这个文件是名片网页的入口，双击它就能在浏览器里看到名片。
-它包含了名片的 HTML 结构，并引入了样式和脚本文件。
--->
-<!DOCTYPE html> <!-- 声明这是一个 HTML5 文档，告诉浏览器用最新的标准来解析 -->
-<html lang="zh-CN"> <!-- 网页根标签，lang="zh-CN" 表示网页语言是简体中文 -->
-<head> <!-- 头部区域：放网页的元信息，不会直接显示在页面上 -->
-    <meta charset="UTF-8"> <!-- 设置字符编码为 UTF-8，保证中文不会乱码 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 让网页在手机上也能正常缩放和显示 -->
-    <title>小明的个人名片</title> <!-- 浏览器标签页上显示的文字 -->
-    <link rel="stylesheet" href="style.css"> <!-- 引入外部样式文件，控制网页的外观 -->
-    <!-- 引入 Font Awesome 图标库，用于显示邮箱等小图标（不依赖任何框架，只是图标字体） -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小明的个人名片</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body> <!-- 身体区域：所有用户能看到的内容都写在这里 -->
-
-    <!-- ========== 页面主容器：把名片居中显示在屏幕中间 ========== -->
-    <div class="page-container"> <!-- 最外层容器，用于把名片放到屏幕正中央 -->
-
-        <!-- ========== 名片卡片主体 ========== -->
-        <div class="card" id="card"> <!-- 名片卡片，id="card" 方便 JavaScript 找到它做动画 -->
-
-            <!-- ========== 头像区域 ========== -->
-            <div class="avatar-section"> <!-- 头像区域的外层容器 -->
-                <div class="avatar" id="avatar"> <!-- 圆形头像的容器，id="avatar" 给 JS 做动画 -->
-                    <!-- 占位头像：用一个灰色圆形 + 文字代替图片，主人以后换成真实图片 -->
-                    <span class="avatar-placeholder">明</span> <!-- 头像占位文字，显示"明"字 -->
+<body>
+    <div class="page-container">
+        <div class="card" id="card">
+            <div class="avatar-section">
+                <div class="avatar" id="avatar">
+                    <span class="avatar-placeholder">明</span>
                 </div>
             </div>
-
-            <!-- ========== 名字区域 ========== -->
-            <h1 class="name">小明</h1> <!-- h1 是最大的一级标题，用来显示名字 -->
-
-            <!-- ========== 一句话介绍 ========== -->
-            <p class="tagline">正在学习用 AI 开发程序</p> <!-- p 是段落标签，用来显示介绍文字 -->
-
-            <!-- ========== 分割线 ========== -->
-            <hr class="divider"> <!-- hr 是水平分割线，用来区分上下内容 -->
-
-            <!-- ========== 联系方式区域 ========== -->
-            <div class="contact-section"> <!-- 联系方式的容器 -->
-                <div class="contact-item"> <!-- 每一行联系方式是一个 contact-item -->
-                    <i class="fa-solid fa-envelope contact-icon"></i> <!-- 邮箱小图标，使用 Font Awesome -->
-                    <span class="contact-text">xiaoming@example.com</span> <!-- 邮箱地址文字 -->
+            <h1 class="name">小明</h1>
+            <p class="tagline">正在学习用 AI 开发程序</p>
+            <hr class="divider">
+            <div class="contact-section">
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope contact-icon"></i>
+                    <span class="contact-text">xiaoming@example.com</span>
                 </div>
             </div>
-
-            <!-- ========== 底部按钮区域 ========== -->
-            <div class="button-section"> <!-- 按钮区域的容器 -->
-                <button class="btn-save" id="btnSave" onclick="saveContact()"> <!-- 保存联系方式的按钮 -->
+            <div class="button-section">
+                <button class="btn-save" id="btnSave" onclick="saveContact()">
                     <i class="fa-solid fa-floppy-disk"></i> 保存名片
                 </button>
-                <button class="btn-share" id="btnShare" onclick="shareCard()"> <!-- 分享名片的按钮 -->
+                <button class="btn-share" id="btnShare" onclick="shareCard()">
                     <i class="fa-solid fa-share-nodes"></i> 分享名片
                 </button>
             </div>
-
-        </div> <!-- 名片卡片结束 -->
-
-        <!-- ========== 卡片下方的「联系我」按钮 ========== -->
-        <button class="btn-contact" id="btnContact" onclick="showEmailModal()"> <!-- 联系我按钮，放在名片外面下方 -->
+        </div>
+        <button class="btn-contact" id="btnContact" onclick="showEmailModal()">
             <i class="fa-solid fa-paper-plane"></i> 联系我
         </button>
+    </div>
 
-    </div> <!-- 页面容器结束 -->
-
-    <!-- ========== 邮箱弹窗（默认隐藏） ========== -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeEmailModal()"> <!-- 弹窗背景遮罩，点击遮罩也能关闭 -->
-        <div class="modal-box" id="modalBox" onclick="event.stopPropagation()"> <!-- 弹窗主体，阻止点击冒泡（点击内部不会关闭） -->
-            <div class="modal-header"> <!-- 弹窗顶部区域 -->
-                <i class="fa-solid fa-envelope-open-text modal-icon"></i> <!-- 弹窗里的信封图标 -->
-                <h3 class="modal-title">我的邮箱</h3> <!-- 弹窗标题 -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeEmailModal()">
+        <div class="modal-box" id="modalBox" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <i class="fa-solid fa-envelope-open-text modal-icon"></i>
+                <h3 class="modal-title">我的邮箱</h3>
             </div>
-            <div class="modal-body"> <!-- 弹窗中间内容区域 -->
-                <p class="modal-text">xiaoming@example.com</p> <!-- 邮箱地址 -->
+            <div class="modal-body">
+                <p class="modal-text">xiaoming@example.com</p>
             </div>
-            <div class="modal-footer"> <!-- 弹窗底部按钮区域 -->
-                <button class="modal-btn-copy" onclick="copyEmailAndClose()"> <!-- 复制邮箱按钮 -->
+            <div class="modal-footer">
+                <button class="modal-btn-copy" onclick="copyEmailAndClose()">
                     <i class="fa-solid fa-copy"></i> 复制邮箱
                 </button>
-                <button class="modal-btn-close" onclick="closeEmailModal()"> <!-- 关闭弹窗按钮 -->
+                <button class="modal-btn-close" onclick="closeEmailModal()">
                     <i class="fa-solid fa-xmark"></i> 关闭
                 </button>
             </div>
         </div>
     </div>
-
-    <!-- 引入外部脚本文件，放在 body 最下面是为了等页面加载完再执行脚本 -->
     <script src="script.js"></script>
 </body>
 </html>
