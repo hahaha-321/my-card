@@ -63,7 +63,33 @@
 
         </div> <!-- 名片卡片结束 -->
 
+        <!-- ========== 卡片下方的「联系我」按钮 ========== -->
+        <button class="btn-contact" id="btnContact" onclick="showEmailModal()"> <!-- 联系我按钮，放在名片外面下方 -->
+            <i class="fa-solid fa-paper-plane"></i> 联系我
+        </button>
+
     </div> <!-- 页面容器结束 -->
+
+    <!-- ========== 邮箱弹窗（默认隐藏） ========== -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeEmailModal()"> <!-- 弹窗背景遮罩，点击遮罩也能关闭 -->
+        <div class="modal-box" id="modalBox" onclick="event.stopPropagation()"> <!-- 弹窗主体，阻止点击冒泡（点击内部不会关闭） -->
+            <div class="modal-header"> <!-- 弹窗顶部区域 -->
+                <i class="fa-solid fa-envelope-open-text modal-icon"></i> <!-- 弹窗里的信封图标 -->
+                <h3 class="modal-title">我的邮箱</h3> <!-- 弹窗标题 -->
+            </div>
+            <div class="modal-body"> <!-- 弹窗中间内容区域 -->
+                <p class="modal-text">xiaoming@example.com</p> <!-- 邮箱地址 -->
+            </div>
+            <div class="modal-footer"> <!-- 弹窗底部按钮区域 -->
+                <button class="modal-btn-copy" onclick="copyEmailAndClose()"> <!-- 复制邮箱按钮 -->
+                    <i class="fa-solid fa-copy"></i> 复制邮箱
+                </button>
+                <button class="modal-btn-close" onclick="closeEmailModal()"> <!-- 关闭弹窗按钮 -->
+                    <i class="fa-solid fa-xmark"></i> 关闭
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- 引入外部脚本文件，放在 body 最下面是为了等页面加载完再执行脚本 -->
     <script src="script.js"></script>
