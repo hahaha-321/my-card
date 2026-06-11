@@ -12,199 +12,182 @@
 /* ========== 全局基础样式 ========== */
 
 * {
-    /* 通配符选择器，选中页面上的所有元素 */
-    margin: 0; /* 清除所有元素默认的外边距 */
-    padding: 0; /* 清除所有元素默认的内边距 */
-    box-sizing: border-box; /* 让元素的宽度包含边框和内边距，方便计算布局 */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    /* 设置整个页面的基础样式 */
-    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif; /* 设置中文字体优先级：微软雅黑 > 苹方 > 英文字体 > 系统默认 */
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); /* 背景渐变：从浅蓝到稍深一点的浅蓝，135度斜角 */
-    min-height: 100vh; /* 页面最小高度 = 整个屏幕高度，保证背景铺满全屏 */
-    display: flex; /* 使用弹性盒子布局，方便把内容居中 */
-    align-items: center; /* 垂直方向居中 */
-    justify-content: center; /* 水平方向居中 */
-    padding: 20px; /* 页面四周留 20 像素的呼吸空间 */
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
 /* ========== 页面容器 ========== */
 
 .page-container {
-    /* 最外层容器，用于包裹名片卡片 */
-    width: 100%; /* 宽度占满父容器 */
-    max-width: 420px; /* 最大宽度限制为 420 像素，防止名片在电脑上太宽 */
-    display: flex; /* 弹性布局 */
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column; /* 改为纵向排列，让名片和按钮上下排列 */
+    align-items: center;
+    justify-content: center;
 }
 
 /* ========== 名片卡片主体 ========== */
 
 .card {
-    /* 名片卡片的白色主体 */
-    width: 100%; /* 宽度占满容器 */
-    background-color: #ffffff; /* 背景颜色：白色 */
-    border-radius: 20px; /* 圆角半径 20 像素，让卡片四个角变圆润 */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12); /* 阴影：向下 10px，模糊 40px，黑色透明度 12% */
-    padding: 40px 30px 30px 30px; /* 内边距：上 40px，右 30px，下 30px，左 30px */
-    text-align: center; /* 卡片内的文字都居中 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 鼠标悬停时会有平滑的放大和阴影变化动画 */
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    padding: 40px 30px 30px 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    /* 鼠标放到名片上时的效果 */
-    transform: translateY(-5px); /* 名片向上移动 5 像素 */
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18); /* 阴影加深一点，产生"浮起来"的感觉 */
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
 }
 
 /* ========== 头像区域 ========== */
 
 .avatar-section {
-    /* 头像区域的外层容器 */
-    margin-bottom: 20px; /* 头像下面留 20 像素间距 */
+    margin-bottom: 20px;
 }
 
 .avatar {
-    /* 圆形头像的容器 */
-    width: 100px; /* 头像宽度 100 像素 */
-    height: 100px; /* 头像高度 100 像素（宽高一样=正圆） */
-    border-radius: 50%; /* 圆角半径 50%，宽高相等时变成正圆形 */
-    margin: 0 auto; /* 上下边距为 0，左右自动 = 水平居中 */
-    background: linear-gradient(135deg, #42a5f5, #1e88e5); /* 头像背景：蓝色渐变，从浅蓝到深蓝 */
-    display: flex; /* 弹性布局 */
-    align-items: center; /* 垂直居中头像内的文字 */
-    justify-content: center; /* 水平居中头像内的文字 */
-    border: 4px solid #e3f2fd; /* 头像外圈加 4 像素宽的浅蓝色边框 */
-    transition: transform 0.3s ease; /* 头像缩放动画 */
-    cursor: default; /* 鼠标悬停时显示默认箭头 */
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #e3f2fd;
+    transition: transform 0.3s ease;
+    cursor: default;
 }
 
 .avatar:hover {
-    /* 鼠标放到头像上时的效果 */
-    transform: scale(1.08); /* 头像放大 8%，有弹跳感 */
+    transform: scale(1.08);
 }
 
 .avatar-placeholder {
-    /* 头像占位文字（显示"明"字） */
-    font-size: 42px; /* 文字大小 42 像素 */
-    color: #ffffff; /* 文字颜色：白色 */
-    font-weight: bold; /* 文字加粗 */
-    user-select: none; /* 禁止用户选中头像内的文字 */
+    font-size: 42px;
+    color: #ffffff;
+    font-weight: bold;
+    user-select: none;
 }
 
 /* ========== 名字 ========== */
 
 .name {
-    /* 名字的样式 */
-    font-size: 28px; /* 名字字体大小 28 像素 */
-    color: #1565c0; /* 名字颜色：深蓝色 */
-    font-weight: 700; /* 字重 700 = 比较粗的字体 */
-    margin-bottom: 8px; /* 名字下方留 8 像素间距 */
-    letter-spacing: 2px; /* 字间距 2 像素，让名字看起来更舒展 */
+    font-size: 28px;
+    color: #1565c0;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
 }
 
 /* ========== 一句话介绍 ========== */
 
 .tagline {
-    /* 介绍文字的样式 */
-    font-size: 15px; /* 介绍文字大小 15 像素 */
-    color: #78909c; /* 介绍文字颜色：灰蓝色，比名字颜色浅 */
-    margin-bottom: 24px; /* 介绍文字下方留 24 像素间距 */
-    line-height: 1.6; /* 行高 1.6 倍，让文字呼吸感更好 */
+    font-size: 15px;
+    color: #78909c;
+    margin-bottom: 24px;
+    line-height: 1.6;
 }
 
 /* ========== 分割线 ========== */
 
 .divider {
-    /* 分割线的样式 */
-    border: none; /* 去掉默认的边框样式 */
-    height: 1px; /* 线的高度为 1 像素 */
-    background: linear-gradient(to right, transparent, #bbdefb, transparent); /* 渐变分割线：两边透明 → 中间浅蓝 → 两边透明 */
-    margin: 0 auto 24px auto; /* 上 0，左右自动居中，下 24px */
-    width: 80%; /* 分割线宽度为卡片的 80%，不完全撑满 */
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #bbdefb, transparent);
+    margin: 0 auto 24px auto;
+    width: 80%;
 }
 
 /* ========== 联系方式区域 ========== */
 
 .contact-section {
-    /* 联系方式区域容器 */
-    margin-bottom: 28px; /* 联系方式下方留 28 像素间距 */
+    margin-bottom: 28px;
 }
 
 .contact-item {
-    /* 每一行联系方式 */
-    display: flex; /* 弹性布局，让图标和文字在同一行 */
-    align-items: center; /* 图标和文字垂直居中对齐 */
-    justify-content: center; /* 图标和文字水平居中 */
-    gap: 8px; /* 图标和文字之间的间距为 8 像素 */
-    padding: 10px 0; /* 上下各 10 像素的内边距 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
 }
 
 .contact-icon {
-    /* 联系方式的小图标 */
-    color: #42a5f5; /* 图标颜色：浅蓝色 */
-    font-size: 16px; /* 图标大小 16 像素 */
-    width: 20px; /* 图标固定宽度 20 像素，保证对齐 */
+    color: #42a5f5;
+    font-size: 16px;
+    width: 20px;
 }
 
 .contact-text {
-    /* 联系方式文字 */
-    font-size: 14px; /* 文字大小 14 像素 */
-    color: #546e7a; /* 文字颜色：深灰蓝 */
-    letter-spacing: 0.5px; /* 字间距 0.5 像素 */
+    font-size: 14px;
+    color: #546e7a;
+    letter-spacing: 0.5px;
 }
 
 /* ========== 按钮区域 ========== */
 
 .button-section {
-    /* 按钮区域的容器 */
-    display: flex; /* 弹性布局，两个按钮水平排列 */
-    gap: 12px; /* 两个按钮之间的间距 12 像素 */
-    justify-content: center; /* 按钮组水平居中 */
+    display: flex;
+    gap: 12px;
+    justify-content: center;
 }
 
 .btn-save,
 .btn-share {
-    /* 保存按钮和分享按钮的共同样式 */
-    padding: 10px 22px; /* 按钮内边距：上下 10px，左右 22px */
-    border: none; /* 去掉按钮默认边框 */
-    border-radius: 25px; /* 按钮圆角 25 像素，变成胶囊形状 */
-    font-size: 14px; /* 按钮文字大小 14 像素 */
-    font-weight: 600; /* 按钮文字半粗体 */
-    cursor: pointer; /* 鼠标悬停时变成手指形状 */
-    transition: all 0.3s ease; /* 所有属性变化都有 0.3 秒的平滑过渡动画 */
-    font-family: inherit; /* 继承 body 设置的中文字体 */
-    letter-spacing: 1px; /* 字间距 1 像素 */
+    padding: 10px 22px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    letter-spacing: 1px;
 }
 
 .btn-save {
-    background-color: #1e88e5; /* 背景颜色：蓝色 */
-    color: #ffffff; /* 文字颜色：白色 */
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3); /* 蓝色阴影 */
+    background-color: #1e88e5;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
 }
 
 .btn-save:hover {
-    background-color: #1565c0; /* 背景颜色变深一点 */
-    box-shadow: 0 6px 16px rgba(30, 136, 229, 0.4); /* 阴影加重 */
-    transform: translateY(-2px); /* 按钮向上浮起 2 像素 */
+    background-color: #1565c0;
+    box-shadow: 0 6px 16px rgba(30, 136, 229, 0.4);
+    transform: translateY(-2px);
 }
 
 .btn-share {
-    background-color: #ffffff; /* 背景颜色：白色 */
-    color: #1e88e5; /* 文字颜色：蓝色 */
-    border: 2px solid #1e88e5; /* 边框：2 像素宽的蓝色实线 */
+    background-color: #ffffff;
+    color: #1e88e5;
+    border: 2px solid #1e88e5;
 }
 
 .btn-share:hover {
-    background-color: #e3f2fd; /* 背景颜色变成浅蓝 */
-    transform: translateY(-2px); /* 按钮向上浮起 2 像素 */
+    background-color: #e3f2fd;
+    transform: translateY(-2px);
 }
 
 .btn-save:active,
 .btn-share:active {
-    transform: translateY(0); /* 点击时按钮回到原位 */
+    transform: translateY(0);
 }
 
 /* ========== 加载入场动画 ========== */
@@ -222,6 +205,150 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ========== 卡片下方的「联系我」按钮 ========== */
+
+.btn-contact {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    margin: 20px auto 0 auto;
+    padding: 12px 0;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(30, 136, 229, 0.35);
+    transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-contact:active {
+    transform: translateY(0);
+}
+
+/* ========== 邮箱弹窗（Modal） ========== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 30px 28px 24px 28px;
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-box {
+    transform: scale(1.0);
+}
+
+.modal-header {
+    margin-bottom: 16px;
+}
+
+.modal-icon {
+    font-size: 40px;
+    color: #42a5f5;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal-title {
+    font-size: 20px;
+    color: #1565c0;
+    font-weight: 700;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+    padding: 14px 0;
+    background-color: #e3f2fd;
+    border-radius: 10px;
+}
+
+.modal-text {
+    font-size: 18px;
+    color: #1e88e5;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.modal-btn-copy {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    background-color: #1e88e5;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.modal-btn-copy:hover {
+    background-color: #1565c0;
+    transform: translateY(-1px);
+}
+
+.modal-btn-close {
+    padding: 10px 20px;
+    border: 2px solid #bbb;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    background-color: #ffffff;
+    color: #78909c;
+    transition: all 0.3s ease;
+}
+
+.modal-btn-close:hover {
+    background-color: #f5f5f5;
+    border-color: #999;
 }
 
 /* ========== 响应式设计：手机屏幕适配 ========== */
@@ -252,9 +379,22 @@ body {
         gap: 10px;
     }
     .btn-save,
-    .btn-share {
+    .btn-share,
+    .btn-contact {
         width: 100%;
         padding: 12px 0;
+    }
+    .modal-box {
+        width: 95%;
+        padding: 24px 18px 20px 18px;
+    }
+    .modal-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .modal-btn-copy,
+    .modal-btn-close {
+        width: 100%;
     }
 }
 
